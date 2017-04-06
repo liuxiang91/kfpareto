@@ -4,7 +4,7 @@ function [ AccTest ,ddTest,NTTest] = nonParetoAnalysis(A,C,Q,R,INITX,INITV,o, tr
 close all;
 n=length(0:step:1);
 rhos=0:step:1;
-betas=0:step:1;]
+betas=0:step:1;
 
 
 
