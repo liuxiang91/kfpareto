@@ -15,12 +15,12 @@ ddTNTmatT=nan(n,n);
 numTestPerYearTNTmatT=nan(n,n);
 parfor i=1:n
     for j=1:n
-            fprintf('Test i=%d,j=%d\n',i,j);
-            [accTNTmatT(i,j),d1,numTestPerYearTNTmatT(i,j),~]=TNT(A,C,Q,R,INITV,INITX,o,betaRho(i,j,1),betaRho(i,j,2),test);
+            fprintf('Test i=%d,j=%d\n’,i,j);
+	[accTNTmatT(i,j),d1,numTestPerYearTNTmatT(i,j),~]=TNT(A,C,Q,R,INITV,INITX,o,betaRho(i,j,1),betaRho(i,j,2),test);
             ddTNTmatT(i,j)=mean(d1);
         end
     end
-end
+
 
 AccTest=accTNTmat(:);
 ddTest=ddTNTmat(:);
