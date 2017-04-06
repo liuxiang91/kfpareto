@@ -8,8 +8,8 @@ betas=0:step:1;
 accTNTmat=zeros(n,n);
 ddTNTmat=zeros(n,n);
 numTestPerYearTNTmat=zeros(n,n);
-for i=1:n
-    parfor j=1:n
+parfor i=1:n
+    for j=1:n
         fprintf ('Train i=%d,j=%d\n',i,j)
         [accTNTmat(i,j),d1,numTestPerYearTNTmat(i,j),~]=TNT(A,C,Q,R,INITV,INITX,o,betas(i),rhos(j),train);
         ddTNTmat(i,j)=mean(d1);
@@ -49,8 +49,8 @@ f=figure();
 accTNTmatT=nan(n,n);
 ddTNTmatT=nan(n,n);
 numTestPerYearTNTmatT=nan(n,n);
-for i=1:n
-    parfor j=1:n
+parfor i=1:n
+    for j=1:n
         if tf(i,j)==1
             fprintf('Test i=%d,j=%d\n',i,j);
             [accTNTmatT(i,j),d1,numTestPerYearTNTmatT(i,j),~]=TNT(A,C,Q,R,INITV,INITX,o,betaRho(i,j,1),betaRho(i,j,2),test);
