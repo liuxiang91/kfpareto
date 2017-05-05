@@ -30,6 +30,7 @@ function [acc,dd] = plotParetoFigTest(f,data,accTNTmat,ddTNTmat,numTestPerYearTN
     % l.Location='southeast';
     xlabel('Average Number of Tests per Patient per Year');
     ylabel('Average Efficiency');
+    title('Testing')
     xlim([0,2])
     ylim([0,1])
     
@@ -46,7 +47,7 @@ function [acc,dd] = plotParetoFigTest(f,data,accTNTmat,ddTNTmat,numTestPerYearTN
     % legend('TNT','Fixed Interval');
     xlabel('Average Number of Tests per Patient per Year');
     ylabel('Diagnostic Delay (years)');
- 
+    title('Testing')
     xlim([0,2])
     ylim([0,1])
     acc=[numTestPerYearTNT(t1),accTNT(t1)];

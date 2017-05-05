@@ -41,6 +41,7 @@ function [f] = plotParetoFig(f,data,accTNTmat,ddTNTmat,numTestPerYearTNTmat,note
 %     l.Location='southeast';
     xlabel('Average Number of Tests per Patient per Year');
     ylabel('Average Efficiency');
+    title('Training');
     xlim([0,2])
     ylim([0,1])
     
@@ -57,6 +58,7 @@ function [f] = plotParetoFig(f,data,accTNTmat,ddTNTmat,numTestPerYearTNTmat,note
 %     legend('TNT','Fixed Interval');
     xlabel('Average Number of Tests per Patient per Year');
     ylabel('Diagnostic Delay (years)');
+    title('Training');
     xlim([0,2])
     ylim([0,1])
 
