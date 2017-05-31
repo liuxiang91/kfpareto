@@ -1,61 +1,45 @@
-function [Accuracy NtestsPerPat DD]=fixedIntervalAnalysis(alldata, n)
+function [Accuracy NtestsPerPat DD]=fixedIntervalAnalysis(data, n)
 %[Accuracy NtestsPerPat DD]=fixed_interval_analysis(alldata, n)
 % Goals:
 %   Calculate the accuracy, number of tests, and diagnostic delay for
 %       fixed-interval testing
 % Inputs:
-%   alldata: cell array. output of TNTread.%      
+%   alldata: cell array. output of TNTread.%
 %   n: interval length (unit: 6 month)
 % Output:
 %   Accuracy: # hit / (# hit + # miss)
 %   NtestsPerPat: number of tests per patient.
 %   DD: diagnostic delay per progression instance
 % Xiang Liu, 7/19/2012, liuxiang@umich.edu
-l=length(alldata);
-d=cell2mat(alldata(2:l,18));
-dold=d;
-count=1;
-i=2;
-exit=0;
- while i< l-1
-    
-    id=alldata{i,1};
-    c=0;
-    
-    
-    while isequal(id,alldata{i+c,1})&&~exit
-        d(i+c-1,2)=count;
-        if i+c<l
-            c=c+1;
-        else
-            exit=1;
-        end
-    end
-    i=i+c;
-    count=count+1;
-end
-HIT=0;
-MISS=0;
-FA=0;
-CR=0;
-counter=0;
-Ntests=0;
-DD=0;
-Accuracy=0;
-dnew=zeros(l-1,3);
-dnew(:,2:3)=d;
-for i=1:n
-    dnew(:,1)=zeros(l-1,1);
-    ind=i:n:l-1;
-    dnew(ind)=1;
-    [DDd Dummy]=Diagnostic_Delay(dnew,1);
-    DD=DD+DDd;
-    Accuracy= Accuracy+sum(dold(ind))/sum(dold);
-    counter=counter+1;
-    Ntests=Ntests+length(ind);
-end
+l=length(data);
 
-Accuracy=Accuracy/counter;
-DD=DD/counter;
-Ntests=Ntests/counter;
-NtestsPerPat=Ntests/max(dnew(:,3));
+allProg=0;
+hit=0;
+nTest=0;
+dd=[];
+for j=1:n
+    for i=2:l
+        if size(data,2)>8
+            prog=data{i,12};
+        else
+            prog=data{i,8};
+        end
+        allProg=allProg+sum(prog);
+        T=length(prog);
+        tests=j:n:T;
+        nTest=nTest+sum(tests)*2/(T-1);
+        hit=hit+sum(prog(tests));
+        for k=1:T
+            if prog(k)==1 && sum(tests==k)==0
+                nextTest=find(test(k:T),1,'first');
+                if ~isnan(nextTest)
+                       dd=[dd nextTest-k];
+                end
+            end
+        end
+
+    end
+end
+Accuracy=hit/allProg;
+NtestsPerPat=nTest/(n*(l-1));
+DD=mean(dd);
