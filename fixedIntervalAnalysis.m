@@ -1,4 +1,4 @@
-function [Accuracy NtestsPerPat DD]=fixed_interval_analysis(alldata, n)
+function [Accuracy NtestsPerPat DD]=fixedIntervalAnalysis(alldata, n)
 %[Accuracy NtestsPerPat DD]=fixed_interval_analysis(alldata, n)
 % Goals:
 %   Calculate the accuracy, number of tests, and diagnostic delay for
