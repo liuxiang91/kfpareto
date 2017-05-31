@@ -26,19 +26,21 @@ function [f] = plotParetoFig(f,data,accTNTmat,ddTNTmat,numTestPerYearTNTmat,note
    % [ accuracy2,dd2,numTestPerYear2 ] = fixedTest( data,3 );
     %[ accuracy3,dd3,numTestPerYear3 ] = fixedTest( data,4 );
         
-
+    [Accuracy1 NtestsPerPat1 DD1]=fixedIntervalAnalysis(data, 2)
+    [Accuracy2 NtestsPerPat2 DD2]=fixedIntervalAnalysis(data, 3)
+    [Accuracy3 NtestsPerPat3 DD3]=fixedIntervalAnalysis(data, 4)
     figure(f);
     subplot(2,2,1);
     plot(numTestPerYearTNT(t1),accTNT(t1),'.');
-%     hold on;
-%     plot(1,0.5,'*r');
-%     plot(2/3,1/3,'*r');
-%     plot(0.5,1/4,'*r');
-%     text(1,0.5,'  1 yr')
-%     text(2/3,1/3,'  1.5 yr')
-%     text(0.5,1/4,'  2 yr')
-%     l=legend('TNT','Fixed Interval');
-%     l.Location='southeast';
+    hold on;
+    plot(NtestsPerPat1,Accuracy1,'*r');
+    plot(NtestsPerPat2,Accuracy2,'*r');
+    plot(NtestsPerPat3,Accuracy3,'*r');
+    text(NtestsPerPat1,Accuracy1,'  1 yr')
+    text(NtestsPerPat2,Accuracy2,'  1.5 yr')
+    text(NtestsPerPat3,Accuracy3,'  2 yr')
+    l=legend('TNT','Fixed Interval');
+    l.Location='southeast';
     xlabel('Average Number of Tests per Patient per Year');
     ylabel('Average Efficiency');
     title('Training');
@@ -48,14 +50,14 @@ function [f] = plotParetoFig(f,data,accTNTmat,ddTNTmat,numTestPerYearTNTmat,note
     
     subplot(2,2,2);
     plot(numTestPerYearTNT(t2),ddTNT(t2)./2,'.');
-%     hold on;
-%     plot(1,mean(0.5./2),'*r');
-%     plot(2/3,mean(1./2),'*r');
-%     plot(0.5,mean(1.5./2),'*r');
-%     text(1,mean(0.5./2),'  1 yr')
-%     text(2/3,mean(1./2),'  1.5 yr')
-%     text(0.5,mean(1.5./2),'  2 yr')
-%     legend('TNT','Fixed Interval');
+    hold on;
+    plot(NtestsPerPat1,mean(DD1./2),'*r');
+    plot(NtestsPerPat2,mean(DD2./2),'*r');
+    plot(NtestsPerPat3,mean(DD3./2),'*r');
+    text(NtestsPerPat1,mean(DD1./2),'  1 yr')
+    text(NtestsPerPat2,mean(DD2./2),'  1.5 yr')
+    text(NtestsPerPat3,mean(DD3./2),'  2 yr')
+    legend('TNT','Fixed Interval');
     xlabel('Average Number of Tests per Patient per Year');
     ylabel('Diagnostic Delay (years)');
     title('Training');
