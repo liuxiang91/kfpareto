@@ -27,11 +27,13 @@ for j=1:n
         allProg=allProg+sum(prog);
         T=length(prog);
         tests=j:n:T;
+        test2=zeros(1,T);
+        test2(tests)=1;
         nTest=nTest+sum(tests)*2/(T-1);
         hit=hit+sum(prog(tests));
         for k=1:T
             if prog(k)==1 && sum(tests==k)==0
-                nextTest=find(tests(k:T),1,'first');
+                nextTest=find(test2(k:T),1,'first');
                 if ~isnan(nextTest)
                        dd=[dd nextTest-k];
                 end
