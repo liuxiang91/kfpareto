@@ -31,7 +31,7 @@ for j=1:n
         hit=hit+sum(prog(tests));
         for k=1:T
             if prog(k)==1 && sum(tests==k)==0
-                nextTest=find(test(k:T),1,'first');
+                nextTest=find(tests(k:T),1,'first');
                 if ~isnan(nextTest)
                        dd=[dd nextTest-k];
                 end
