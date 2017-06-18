@@ -1,4 +1,4 @@
-function [ acc ,dd] = paretoAnalysis(A,C,Q,R,INITX,INITV,o, train,test,step,noteTrain,noteTest )
+function [ acc ,dd] = paretoAnalysis(A,C,Q,R,INITX,INITV,o, train,test,step,noteTrain,noteTest ,cap)
 %PARETOANALYSIS Summary of this function goes here
 %   Detailed explanation goes here
 close all;
@@ -26,7 +26,7 @@ fprintf('Running rho-beta combinations in the training set:\n')
 parfor_progress(n);
 parfor i=1:n
     for j=1:n
-        [accTNTmat(i,j),d1,numTestPerYearTNTmat(i,j),~]=TNT(A.Value,C.Value,Q.Value,R.Value,INITV.Value,INITX.Value,o.Value,betasP.Value(i),rhosP.Value(j),trainP.Value);
+        [accTNTmat(i,j),d1,numTestPerYearTNTmat(i,j),~]=TNT(A.Value,C.Value,Q.Value,R.Value,INITV.Value,INITX.Value,o.Value,betasP.Value(i),rhosP.Value(j),trainP.Value,3,cap);
         ddTNTmat(i,j)=mean(d1);
     end
     parfor_progress;
@@ -73,7 +73,7 @@ parfor_progress(n);
 parfor i=1:n
     for j=1:n
         if tf.Value(i,j)==1
-            [accTNTmatT(i,j),d1,numTestPerYearTNTmatT(i,j),~]=TNT(A.Value,C.Value,Q.Value,R.Value,INITV.Value,INITX.Value,o.Value,betaRho.Value(i,j,1),betaRho.Value(i,j,2),testP.Value);
+            [accTNTmatT(i,j),d1,numTestPerYearTNTmatT(i,j),~]=TNT(A.Value,C.Value,Q.Value,R.Value,INITV.Value,INITX.Value,o.Value,betaRho.Value(i,j,1),betaRho.Value(i,j,2),testP.Value,3,cap);
             ddTNTmatT(i,j)=mean(d1);
         end
     end
